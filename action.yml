@@ -1,0 +1,25 @@
+name: "Append on Merge"
+description: "Github Action to combine files while preventing PR conflicts"
+# inputs:
+#   who-to-greet:  # id of input
+#     description: 'Who to greet'
+#     required: true
+#     default: 'World'
+# outputs:
+#   random-number:
+#     description: "Random number"
+#     value: ${{ steps.random-number-generator.outputs.random-number }}
+runs:
+  using: "composite"
+  steps:
+    - uses: ruby/setup-ruby@v1
+
+    # Runs the code
+    - run: ruby append_on_merge.rb
+      shell: bash
+
+    # See diff
+    - run: git diff
+      shell: bash
+
+    # TODO: Commit & push
