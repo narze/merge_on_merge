@@ -2,8 +2,12 @@ name: "Append on Merge"
 description: "Github Action to combine files while preventing PR conflicts"
 inputs:
   github_token:
-    description: 'Github Token'
+    description: "Github Token"
     required: true
+  branch:
+    description: "Branch to push"
+    required: false
+    default: "main"
 # outputs:
 #   random-number:
 #     description: "Random number"
@@ -22,8 +26,9 @@ runs:
     # See diff
     - run: git diff
       shell: bash
-      
+
     - name: Commit & Push changes
       uses: Andro999b/push@v1.3
       with:
         github_token: ${{ inputs.github_token }}
+        branch: ${{ inputs.branch }}
