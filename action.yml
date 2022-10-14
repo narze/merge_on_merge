@@ -27,8 +27,17 @@ runs:
     - run: git diff
       shell: bash
 
+    # TODO: Replace with newer/faster action
+    - uses: mb2dev/github-action-comment-pull-request@1.0.0
+      if: ${{ github.event_name == 'pull_request' }}
+      with:
+        message: "Preview message test"
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+
+    # Commit on merge
     - name: Commit & Push changes
       uses: Andro999b/push@v1.3
+      if: ${{ github.event_name == 'pull_request' && github.ref_name == inputs.branch }}
       with:
         github_token: ${{ inputs.github_token }}
         branch: ${{ inputs.branch }}
