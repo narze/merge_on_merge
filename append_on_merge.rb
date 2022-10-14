@@ -7,6 +7,7 @@ def run(*_args)
   base = 'README.md'
   output = 'README.md'
   processed = 'processed'
+  FileUtils.mkdir_p(processed)
 
   puts "Consuming files in #{input} path"
 
