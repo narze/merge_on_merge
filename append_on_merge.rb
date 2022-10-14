@@ -11,7 +11,7 @@ def run(*_args)
   puts "Consuming files in #{input} path"
 
   files = Dir.open(input) do |input_dir|
-    Dir.glob(File.join(input_dir, '*'))
+    Dir.glob(File.join(Dir.pwd, input_dir, '*'))
   end
 
   puts "Appending files to #{output}, using #{base} as base"
