@@ -23,16 +23,31 @@ runs:
     - run: ruby append_on_merge.rb
       shell: bash
 
-    # See diff
-    - run: git diff
+    # See diff & output diff for comment
+    - id: diff
       shell: bash
+      run: |
+        # git diff
+
+        git_diff=$(git diff)
+
+        # Support multiline output
+        git_diff="${git_diff//'%'/'%25'}"
+        git_diff="${git_diff//$'\n'/'%0A'}"
+        git_diff="${git_diff//$'\r'/'%0D'}"
+
+        echo $git_diff
+        echo "::set-output name=git_diff::$git_diff"
 
     # TODO: Replace with newer/faster action
     - uses: mb2dev/github-action-comment-pull-request@1.0.0
       if: ${{ github.event_name == 'pull_request' }}
       with:
-        message: "Preview message test"
         GITHUB_TOKEN: ${{ inputs.github_token }}
+        message: |
+          Diff:
+          ${{ steps.diff.outputs.git_diff }}
+
 
     # Commit on merge
     - name: Commit & Push changes
