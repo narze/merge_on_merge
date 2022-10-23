@@ -27,18 +27,13 @@ runs:
     - id: diff
       shell: bash
       run: |
-        # git diff
+        # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
 
-        git_diff=$(git diff)
+        eof="EOF$RANDOM$(date +%s)"
 
-        # Support multiline output
-        # git_diff="${git_diff//'%'/'%25'}"
-        # git_diff="${git_diff//$'\n'/'%0A'}"
-        # git_diff="${git_diff//$'\r'/'%0D'}"
-
-        echo $git_diff
-        echo "git_diff=$git_diff" >> $GITHUB_OUTPUT
-        # echo "::set-output name=git_diff::$git_diff"
+        echo "git_diff<<$eof >> $GITHUB_OUTPUT
+        git diff >> $GITHUB_OUTPUT
+        echo $eof >> $GITHUB_OUTPUT
 
     # TODO: Replace with newer/faster action
     - uses: mb2dev/github-action-comment-pull-request@1.0.0
