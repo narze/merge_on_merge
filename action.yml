@@ -4,10 +4,16 @@ inputs:
   github_token:
     description: "Github Token"
     required: true
-  branch:
-    description: "Branch to push"
+  preview:
+    description: "Post preview as pull request comment"
+    type: "boolean"
     required: false
-    default: "main"
+    default: false
+  commit:
+    description: "Run commit and push"
+    type: "boolean"
+    required: false
+    default: false
 # outputs:
 #   random-number:
 #     description: "Random number"
@@ -37,7 +43,7 @@ runs:
 
     # TODO: Replace with newer/faster action
     - uses: mb2dev/github-action-comment-pull-request@1.0.0
-      if: ${{ github.event_name == 'pull_request' }}
+      if: inputs.preview
       with:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         message: |
@@ -49,7 +55,6 @@ runs:
     # Commit on merge
     - name: Commit & Push changes
       uses: Andro999b/push@v1.3
-      if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged }}
+      if: inputs.commit
       with:
         github_token: ${{ inputs.github_token }}
-        branch: ${{ inputs.branch }}
