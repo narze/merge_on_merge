@@ -46,8 +46,9 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         message: |
           Diff:
+          ```diff
           ${{ steps.diff.outputs.git_diff }}
-
+          ```
 
     # Commit on merge
     - name: Commit & Push changes
