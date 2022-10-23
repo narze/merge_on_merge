@@ -33,10 +33,12 @@ runs:
         ruby-version: 3.1
 
     # Change path, run the code
-    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
-      shell: bash
-    - run: ruby append_on_merge.rb "${{ inputs.input_path }}" "${{ inputs.base }}" "${{ inputs.output }}" "${{ inputs.processed_path }}"
-      shell: bash
+    # - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+    #   shell: bash
+    - shell: bash
+      run: |
+        cd ${{ github.action_path }}
+        ruby append_on_merge.rb "${{ inputs.input_path }}" "${{ inputs.base }}" "${{ inputs.output }}" "${{ inputs.processed_path }}"
 
     # See diff & output diff for comment
     - id: diff
