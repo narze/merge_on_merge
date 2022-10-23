@@ -46,7 +46,7 @@ runs:
       with:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         message: |
-          Diff:
+          Changes when this Pull Request is merged:
           ```diff
           ${{ steps.diff.outputs.git_diff }}
           ```
@@ -54,7 +54,7 @@ runs:
     # Commit on merge
     - name: Commit & Push changes
       uses: Andro999b/push@v1.3
-      if: ${{ github.event_name == 'pull_request' && github.ref_name == inputs.branch }}
+      if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged }}
       with:
         github_token: ${{ inputs.github_token }}
         branch: ${{ inputs.branch }}
