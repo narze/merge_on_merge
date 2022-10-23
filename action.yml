@@ -31,9 +31,9 @@ runs:
 
         eof="EOF$RANDOM$(date +%s)"
 
-        echo "git_diff<<$eof >> $GITHUB_OUTPUT
+        echo "git_diff<<$eof" >> $GITHUB_OUTPUT
         git diff >> $GITHUB_OUTPUT
-        echo $eof >> $GITHUB_OUTPUT
+        echo "$eof" >> $GITHUB_OUTPUT
 
     # TODO: Replace with newer/faster action
     - uses: mb2dev/github-action-comment-pull-request@1.0.0
