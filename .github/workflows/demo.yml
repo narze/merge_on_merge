@@ -21,12 +21,10 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          preview: true
-          commit: false
+          mode: "preview"
 
       - uses: narze/append_on_merge@main
         if: ${{ github.event_name == 'push' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          preview: false
-          commit: true
+          mode: "commit"

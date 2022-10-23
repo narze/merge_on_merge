@@ -4,20 +4,11 @@ inputs:
   github_token:
     description: "Github Token"
     required: true
-  preview:
-    description: "Post preview as pull request comment"
-    type: "boolean"
+  mode:
+    description: "'preview' Post preview as pull request comment | 'commit' Commit & Push"
     required: false
-    default: false
-  commit:
-    description: "Run commit and push"
-    type: "boolean"
-    required: false
-    default: false
-# outputs:
-#   random-number:
-#     description: "Random number"
-#     value: ${{ steps.random-number-generator.outputs.random-number }}
+    default: "preview"
+
 runs:
   using: "composite"
   steps:
@@ -43,7 +34,7 @@ runs:
 
     # TODO: Replace with newer/faster action
     - uses: mb2dev/github-action-comment-pull-request@1.0.0
-      if: ${{ inputs.preview }}
+      if: ${{ inputs.mode == "preview" }}
       with:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         message: |
@@ -55,6 +46,6 @@ runs:
     # Commit on merge
     - name: Commit & Push changes
       uses: Andro999b/push@v1.3
-      if: ${{ inputs.commit }}
+      if: ${{ inputs.mode == "commit" }}
       with:
         github_token: ${{ inputs.github_token }}
