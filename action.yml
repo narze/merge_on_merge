@@ -5,7 +5,7 @@ inputs:
     description: "Github Token"
     required: true
   mode:
-    description: "'preview' Post preview as pull request comment | 'commit' Commit & Push"
+    description: "preview: Post preview as pull request comment, commit: Commit & Push"
     required: false
     default: "preview"
 
@@ -34,7 +34,7 @@ runs:
 
     # TODO: Replace with newer/faster action
     - uses: mb2dev/github-action-comment-pull-request@1.0.0
-      if: ${{ inputs.mode == "preview" }}
+      if: ${{ inputs.mode == 'preview' }}
       with:
         GITHUB_TOKEN: ${{ inputs.github_token }}
         message: |
@@ -46,6 +46,6 @@ runs:
     # Commit on merge
     - name: Commit & Push changes
       uses: Andro999b/push@v1.3
-      if: ${{ inputs.mode == "commit" }}
+      if: ${{ inputs.mode == 'commit' }}
       with:
         github_token: ${{ inputs.github_token }}
