@@ -38,13 +38,7 @@ runs:
 
         echo $git_diff
         echo "git_diff=$git_diff" >> $GITHUB_OUTPUT
-
         # echo "::set-output name=git_diff::$git_diff"
-
-        # Support multiline output
-        GITHUB_OUTPUT="${GITHUB_OUTPUT//'%'/'%25'}"
-        GITHUB_OUTPUT="${GITHUB_OUTPUT//$'\n'/'%0A'}"
-        GITHUB_OUTPUT="${GITHUB_OUTPUT//$'\r'/'%0D'}"
 
     # TODO: Replace with newer/faster action
     - uses: mb2dev/github-action-comment-pull-request@1.0.0
