@@ -36,9 +36,7 @@ runs:
     # - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
     #   shell: bash
     - shell: bash
-      run: |
-        cd ${{ github.action_path }}
-        ruby append_on_merge.rb "${{ inputs.input_path }}" "${{ inputs.base }}" "${{ inputs.output }}" "${{ inputs.processed_path }}"
+      run: ruby ${{ github.action_path }}/append_on_merge.rb "${{ inputs.input_path }}" "${{ inputs.base }}" "${{ inputs.output }}" "${{ inputs.processed_path }}"
 
     # See diff & output diff for comment
     - id: diff
