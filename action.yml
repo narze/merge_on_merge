@@ -49,3 +49,4 @@ runs:
       if: ${{ inputs.mode == 'commit' }}
       with:
         github_token: ${{ inputs.github_token }}
+        branch: ${{ github.ref }}
