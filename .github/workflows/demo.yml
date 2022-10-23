@@ -4,11 +4,6 @@ on:
   pull_request:
   push:
     branches: [ main ]
-#   schedule:
-#     - cron: "0 0 * * *"
-  workflow_dispatch:
-#   watch:
-#     types: [started]
 
 jobs:
   build:
@@ -20,11 +15,19 @@ jobs:
       - uses: narze/append_on_merge@main
         if: ${{ github.event_name == 'pull_request' }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           mode: "preview"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          input_path: "input"
+          base: "README.md"
+          output: "README.md"
+          processed_path: "processed"
 
       - uses: narze/append_on_merge@main
         if: ${{ github.event_name == 'push' }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           mode: "commit"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          input_path: "input"
+          base: "README.md"
+          output: "README.md"
+          processed_path: "processed"

@@ -2,17 +2,13 @@
 
 require 'fileutils'
 
-def run(*_args)
-  input = 'input'
-  base = 'README.md'
-  output = 'README.md'
-  processed = 'processed'
-  FileUtils.mkdir_p(processed)
-  FileUtils.mkdir_p(input)
+def run(input_path, base, output, processed_path)
+  FileUtils.mkdir_p(processed_path)
+  FileUtils.mkdir_p(input_path)
 
-  puts "Consuming files in #{input} path"
+  puts "Consuming files in #{input_path} path"
 
-  files = Dir.open(input) do |input_dir|
+  files = Dir.open(input_path) do |input_dir|
     FileUtils.touch File.join(Dir.pwd, input_dir, '.gitkeep')
 
     Dir.glob(File.join(Dir.pwd, input_dir, '*'))
@@ -44,8 +40,8 @@ def run(*_args)
     f.write(base_lines.join("\n"))
   end
 
-  # Move files to processed folder
-  FileUtils.mv files, processed, verbose: true
+  # Move files to processed_path folder
+  FileUtils.mv files, processed_path, verbose: true
 end
 
-run(ARGV)
+run(*ARGV)
