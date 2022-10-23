@@ -13,6 +13,8 @@ def run(*_args)
   puts "Consuming files in #{input} path"
 
   files = Dir.open(input) do |input_dir|
+    FileUtils.touch File.join(Dir.pwd, input_dir, '.gitkeep')
+
     Dir.glob(File.join(Dir.pwd, input_dir, '*'))
   end
 
