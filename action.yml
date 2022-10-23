@@ -32,7 +32,9 @@ runs:
       with:
         ruby-version: 3.1
 
-    # Runs the code
+    # Change path, run the code
+    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+      shell: bash
     - run: ruby append_on_merge.rb "${{ inputs.input_path }}" "${{ inputs.base }}" "${{ inputs.output }}" "${{ inputs.processed_path }}"
       shell: bash
 
