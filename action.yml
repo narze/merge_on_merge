@@ -54,6 +54,7 @@ runs:
       uses: marocchino/sticky-pull-request-comment@v2.2.1
       if: ${{ inputs.mode == 'preview' }}
       with:
+        GITHUB_TOKEN: ${{ inputs.github_token }}
         hide_and_recreate: true
         hide_classify: "OUTDATED"
         message: |
