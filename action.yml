@@ -3,7 +3,8 @@ description: "Github Action to combine files while preventing PR conflicts"
 inputs:
   github_token:
     description: "Github Token"
-    required: true
+    default: "${{ github.token }}"
+    required: false
   mode:
     description: "preview: Post preview as pull request comment, commit: Commit & Push"
     required: false
