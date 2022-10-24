@@ -41,8 +41,8 @@ runs:
     - shell: bash
       run: ruby ${{ github.action_path }}/append_on_merge.rb "${{ inputs.input_path }}" "${{ inputs.base }}" "${{ inputs.output }}" "${{ inputs.processed_path }}"
 
-    - shell: bash
-      run: git status
+    # - shell: bash
+    #   run: git status
 
     # See diff & output diff for comment
     - id: diff
@@ -60,7 +60,7 @@ runs:
       uses: marocchino/sticky-pull-request-comment@v2.2.1
       if: ${{ inputs.mode == 'preview' }}
       with:
-        GITHUB_TOKEN: ${{ inputs.github_token }}
+        # GITHUB_TOKEN: ${{ inputs.github_token }}
         repo: ${{ inputs.repo }}
         hide_and_recreate: true
         hide_classify: "OUTDATED"
