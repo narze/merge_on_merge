@@ -50,18 +50,18 @@ runs:
         git diff >> $GITHUB_OUTPUT
         echo "$eof" >> $GITHUB_OUTPUT
 
-    # TODO: Replace with newer/faster action
-    - uses: mb2dev/github-action-comment-pull-request@1.0.0
+    - name: Add preview comment
+      uses: marocchino/sticky-pull-request-comment@v2.2.1
       if: ${{ inputs.mode == 'preview' }}
       with:
-        GITHUB_TOKEN: ${{ inputs.github_token }}
+        hide_and_recreate: true
+        hide_classify: "OUTDATED"
         message: |
           Changes when this Pull Request is merged:
           ```diff
           ${{ steps.diff.outputs.git_diff }}
           ```
 
-    # Commit on merge
     - name: Commit & Push changes
       uses: Andro999b/push@v1.3
       if: ${{ inputs.mode == 'commit' }}
