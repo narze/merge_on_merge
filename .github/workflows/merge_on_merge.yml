@@ -6,6 +6,10 @@ on:
   push:
     branches: [main]
 
+# Add contents write permission to allow commits
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
