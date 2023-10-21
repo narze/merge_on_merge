@@ -1,0 +1,14 @@
+{
+  "path": {
+    "to": {
+      "entries": [
+        {
+          "name": "foo"
+        },
+        {
+          "name": "bar"
+        }
+      ]
+    }
+  }
+}

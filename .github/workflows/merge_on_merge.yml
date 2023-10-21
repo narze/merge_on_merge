@@ -1,4 +1,4 @@
-name: Append on merge
+name: Merge on merge
 
 on:
   # Don't use "pull_request" it won't have access to GITHUB_TOKEN on forks
@@ -16,21 +16,23 @@ jobs:
           # Need to specify ref for pull_request_target events
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - uses: narze/append_on_merge@main
+      - uses: narze/merge_on_merge@main
         if: ${{ github.event_name == 'pull_request_target' }}
         with:
           mode: "preview"
           input_path: "input"
-          base: "README.md"
-          output: "README.md"
+          base: "data.json"
+          merge_json_path: "path.to.entries"
+          output: "data.json"
           processed_path: "processed"
           repo: ${{ github.event.pull_request.repository.name }}
 
-      - uses: narze/append_on_merge@main
+      - uses: narze/merge_on_merge@main
         if: ${{ github.event_name == 'push' }}
         with:
           mode: "commit"
           input_path: "input"
-          base: "README.md"
-          output: "README.md"
+          base: "data.json"
+          merge_json_path: "path.to.entries"
+          output: "data.json"
           processed_path: "processed"
