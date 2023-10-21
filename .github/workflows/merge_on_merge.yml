@@ -6,9 +6,11 @@ on:
   push:
     branches: [main]
 
-# Add contents write permission to allow commits
 permissions:
+  # Add contents write permission to allow commits
   contents: write
+  # Add pull-requests write permission to allow commenting
+  pull-requests: write
 
 jobs:
   build:
